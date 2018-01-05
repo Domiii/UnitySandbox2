@@ -10,7 +10,7 @@ public class StairCase : MonoBehaviour {
 
 	public float narrowWidth = 1;
 	public float wideWidth = 2;
-	public float animDelay = 1;
+	public float animSpeed = 1;
 
 	void Start () {
 		

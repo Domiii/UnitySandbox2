@@ -19,15 +19,15 @@ public class StepDetector : MonoBehaviour {
 	}
 
 	void UpdateAnimState(float delta) {
-		var scale = transform.localScale;
+		var scale = step.transform.localScale;
 		var x = scale.x + delta;
 		x = Mathf.Clamp (x, stairCase.narrowWidth, stairCase.wideWidth);
-		transform.localScale = new Vector3 (x, scale.y, scale.z);
+		step.transform.localScale = new Vector3 (x, scale.y, scale.z);
 	}
 
 	void FixedUpdate () {
-		var delay = stairCase.animDelay;
-		var delta = Time.fixedDeltaTime * delay;
+		var speed = stairCase.animSpeed;
+		var delta = Time.fixedDeltaTime * speed;
 		if (targetState == StepState.Narrow) {
 			// narrow goes in the opposite direction
 			delta = -delta;
@@ -36,6 +36,7 @@ public class StepDetector : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
+		Debug.Log (other);
 		if (other.gameObject.GetComponent<Player> ()) {
 			targetState = StepState.Wide;
 		}
