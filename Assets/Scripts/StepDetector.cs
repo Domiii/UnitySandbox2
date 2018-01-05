@@ -36,7 +36,6 @@ public class StepDetector : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		Debug.Log (other);
 		if (other.gameObject.GetComponent<Player> ()) {
 			targetState = StepState.Wide;
 		}
