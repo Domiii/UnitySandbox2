@@ -8,10 +8,10 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
 public class Grabbable : MonoBehaviour {
-	void OnMouseDown() {
-		var player = Player.instance;
-		var gravityController = player.GetComponent<GravityController> ();
-
-		gravityController.PickUp (GetComponent<Rigidbody>());
-	}
+//	void OnMouseDown() {
+//		var player = Player.instance;
+//		var gravityController = player.GetComponent<GravityController> ();
+//
+//		gravityController.PickUp (GetComponent<Rigidbody>());
+//	}
 }

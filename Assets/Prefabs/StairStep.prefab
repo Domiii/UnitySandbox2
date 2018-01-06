@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 65497496072339778}
   - component: {fileID: 23316721841958676}
   - component: {fileID: 114385149053422598}
-  - component: {fileID: 111217053038457158}
   m_Layer: 0
   m_Name: StairStep
   m_TagString: Untagged
@@ -179,20 +178,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!111 &111217053038457158
-Animation:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1268491540443640}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &114064824449973424
 MonoBehaviour:
   m_ObjectHideFlags: 1

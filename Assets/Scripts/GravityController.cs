@@ -18,6 +18,8 @@ public class GravityController : MonoBehaviour {
 	/// </summary>
 	public float swingPower = 1;
 
+	public float maxDistance = 1000;
+
 	public int swingSmoothFactor = 2;
 
 	Vector3 previousGravityPointPosition;
@@ -27,13 +29,28 @@ public class GravityController : MonoBehaviour {
 	/// </summary>
 	public Rigidbody grabbedObject;
 
+	readonly Vector3 cameraCenter = new Vector3(0.5F, 0.5F, 0);
+
 	void FixedUpdate() {
+		var isPulling = Input.GetMouseButton (0);
 		if (grabbedObject != null) {
-			if (!Input.GetMouseButton (0)) {
+			if (!isPulling) {
 				// drop object when mouse is released
 				DropObject ();
 			} else {
+				// keep pulling object
 				PullObject (grabbedObject);
+			}
+		}
+		else if (isPulling) {
+			// raycast to see if we can start pulling
+			var ray = Camera.main.ViewportPointToRay(cameraCenter);
+			RaycastHit hit;
+			if (Physics.Raycast (ray, out hit, maxDistance)) {
+				if (hit.collider.GetComponent<Grabbable>()) {
+					// if it's grabbable, grab it!
+					grabbedObject = hit.collider.GetComponent<Rigidbody> ();
+				}
 			}
 		}
 	}
@@ -43,7 +60,9 @@ public class GravityController : MonoBehaviour {
 	/// </summary>
 	void PullObject(Rigidbody obj) {
 		// compute force direction
-		var dir = gravityPoint.transform.position - obj.transform.position;
+		//var objPos = obj.transform.position;
+		var objPos = obj.GetComponent<Collider>().bounds.center;
+		var dir = gravityPoint.transform.position - objPos;
 		var dist = dir.magnitude;
 		if (dir.magnitude < 0.1f) {
 			// stop pulling when very close
@@ -59,11 +78,11 @@ public class GravityController : MonoBehaviour {
 		var speed = pullPower * Time.fixedDeltaTime;
 		var delta = dir * speed;
 
-		if (dist > speed * 0.1f) {
-			delta *= dist;
-		} else {
-			// if is very close, stop moving, prevent oscillation
-			delta = Vector3.zero;
+
+		delta *= dist;
+		if (dist < speed * 0.1f) {
+			// if is very close, scale with dist, to damp oscillation
+			delta *= dist * dist;
 		}
 
 		// add mouseMomentum
