@@ -19,13 +19,9 @@ public class MultiObjectGravityGrabber : MonoBehaviour {
 	/// </summary>
 	public float pullPower = 200;
 
+	public float maxRadius = 10;
 
-	/// <summary>
-	/// 
-	/// </summary>
-	public float swingPower = 1;
-
-	public float maxDistance = 10;
+	public new Light light;
 
 	HashSet<Rigidbody> grabbedObjects = new HashSet<Rigidbody>();
 	HashSet<Rigidbody> tmpObjects = new HashSet<Rigidbody> ();
@@ -47,6 +43,21 @@ public class MultiObjectGravityGrabber : MonoBehaviour {
 		}
 	}
 
+	void Update() {
+		// keep everything in sync with the currently set maxDistance
+
+		// height should always be equal to the radius
+		var pos = transform.position;
+		if (pos.y != maxRadius) {
+			transform.position = new Vector3 (pos.x, maxRadius, pos.z);
+		}
+
+
+		if (light) {
+			light.range = maxRadius * 2;
+		}
+	}
+
 	void FixedUpdate() {
 		var isPulling = Input.GetMouseButton (0);
 		if (!isPulling) {
@@ -63,11 +74,11 @@ public class MultiObjectGravityGrabber : MonoBehaviour {
 	/// Find all objects in the vaccinity that are not being pulled yet
 	/// </summary>
 	void CollectObjects() {
-		var count = Physics.OverlapSphereNonAlloc (gravityPoint.position, maxDistance, foundObjects, grabbableLayerMask);
+		var count = Physics.OverlapSphereNonAlloc (gravityPoint.position, maxRadius, foundObjects, grabbableLayerMask);
 		while (count >= foundObjects.Length) {
 			// the buffer is too small -> double size and try again
 			foundObjects = new Collider[foundObjects.Length*2];
-			count = Physics.OverlapSphereNonAlloc (gravityPoint.position, maxDistance, foundObjects, grabbableLayerMask);
+			count = Physics.OverlapSphereNonAlloc (gravityPoint.position, maxRadius, foundObjects, grabbableLayerMask);
 		}
 
 		// remove all objects that are not around this time
@@ -103,7 +114,9 @@ public class MultiObjectGravityGrabber : MonoBehaviour {
 	/// </summary>
 	void PullObjects() {
 		foreach (var body in grabbedObjects) {
-			PullObject (body);
+			if (body) {
+				PullObject (body);
+			}
 		}
 	}
 
@@ -155,13 +168,17 @@ public class MultiObjectGravityGrabber : MonoBehaviour {
 //	}
 
 	void DropObject(Rigidbody body) {
-		body.useGravity = true;
+		if (body) {
+			body.useGravity = true;
+		}
 		grabbedObjects.Remove (body);
 	}
 
 	void DropObjects() {
 		foreach (var body in grabbedObjects) {
-			body.useGravity = true;
+			if (body) {
+				body.useGravity = true;
+			}
 		}
 		grabbedObjects.Clear ();
 	}
