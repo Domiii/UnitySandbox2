@@ -74,11 +74,15 @@ public class MultiObjectGravityGrabber : MonoBehaviour {
 	/// Find all objects in the vaccinity that are not being pulled yet
 	/// </summary>
 	void CollectObjects() {
-		var count = Physics.OverlapSphereNonAlloc (gravityPoint.position, maxRadius, foundObjects, grabbableLayerMask);
+		var p1 = gravityPoint.position;
+		p1.y = -100;	// very small value
+		var p2 = gravityPoint.position;
+		p2.y = 100;	// very large value
+		var count = Physics.OverlapCapsuleNonAlloc (p1, p2, maxRadius, foundObjects, grabbableLayerMask);
 		while (count >= foundObjects.Length) {
 			// the buffer is too small -> double size and try again
 			foundObjects = new Collider[foundObjects.Length*2];
-			count = Physics.OverlapSphereNonAlloc (gravityPoint.position, maxRadius, foundObjects, grabbableLayerMask);
+			count = Physics.OverlapCapsuleNonAlloc (p2, p1, maxRadius, foundObjects, grabbableLayerMask);
 		}
 
 		// remove all objects that are not around this time
@@ -90,7 +94,7 @@ public class MultiObjectGravityGrabber : MonoBehaviour {
 			tmpObjects.Remove (collider.GetComponent<Rigidbody>());
 		}
 		foreach (var body in tmpObjects) {
-			DropObject (body);
+			StopObjectGrab (body);
 		}
 		tmpObjects.Clear ();
 
@@ -106,7 +110,7 @@ public class MultiObjectGravityGrabber : MonoBehaviour {
 
 	void StartObjectGrab(Rigidbody body) {
 		grabbedObjects.Add (body);
-		body.useGravity = false;
+		body.GetComponent<ResourceObject> ().SetGrabbed(true, this);
 	}
 
 	/// <summary>
@@ -167,9 +171,9 @@ public class MultiObjectGravityGrabber : MonoBehaviour {
 //		return swingMomentum;
 //	}
 
-	void DropObject(Rigidbody body) {
+	void StopObjectGrab(Rigidbody body) {
 		if (body) {
-			body.useGravity = true;
+			body.GetComponent<ResourceObject> ().SetGrabbed(false, this);
 		}
 		grabbedObjects.Remove (body);
 	}
@@ -177,7 +181,7 @@ public class MultiObjectGravityGrabber : MonoBehaviour {
 	void DropObjects() {
 		foreach (var body in grabbedObjects) {
 			if (body) {
-				body.useGravity = true;
+				body.GetComponent<ResourceObject> ().SetGrabbed(false, this);
 			}
 		}
 		grabbedObjects.Clear ();
