@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb602b39f2253c41b9ef1d166d8ae59, type: 3}
+  m_Name: Woman
+  m_EditorClassIdentifier: 
+  Name: woman
+  UiPicture: {fileID: 21300000, guid: d5e36ae108954ac4083b3ffafecd388c, type: 3}
+  Prefab: {fileID: 1728206044103224, guid: fb22f39b922a8ac48aa2b51dbaa9f1db, type: 2}
+  ghostCache: {fileID: 1567484405815236, guid: e6634a7eb95279a4dacb294cc4316616, type: 2}
+  ghostMaterial: {fileID: 2100000, guid: f34efb05ceefcf34aa38fd9b235c9a74, type: 2}
