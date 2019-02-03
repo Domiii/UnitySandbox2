@@ -1,5 +1,4 @@
-# UnitySandbox2
-Random collection of game elements :)
+Random collection of game elements, primarily physics based stuff.
 
 
 Most importantly:
