@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb602b39f2253c41b9ef1d166d8ae59, type: 3}
+  m_Name: Cube_rb
+  m_EditorClassIdentifier: 
+  Name: Cube RB
+  UiPicture: {fileID: 21300000, guid: 3738e6738ba2c1242a310c88e9bc0f02, type: 3}
+  Prefab: {fileID: 1565422623351976, guid: ab0e1b1ef2157f24e84041be7bcaa116, type: 2}
+  ghostCache: {fileID: 1861544531180268, guid: 82f6affcfd29296418f31b8e96f1b775, type: 2}
+  ghostMaterial: {fileID: 2100000, guid: f34efb05ceefcf34aa38fd9b235c9a74, type: 2}

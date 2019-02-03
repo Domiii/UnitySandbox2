@@ -36,13 +36,13 @@ public class StepDetector : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.GetComponent<Player> ()) {
+		if (Living.GetLiving(other)) {
 			targetState = StepState.Wide;
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
-		if (other.gameObject.GetComponent<Player> ()) {
+		if (Living.GetLiving(other)) {
 			targetState = StepState.Narrow;
 		}
 	}
