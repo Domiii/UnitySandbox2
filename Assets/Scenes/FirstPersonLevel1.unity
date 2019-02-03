@@ -264,6 +264,10 @@ Prefab:
       propertyPath: m_MouseLook.YSensitivity
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Mass
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_IsPrefabParent: 0
@@ -3219,11 +3223,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4678250973904088, guid: d5202901ff847461ab2d52e678020624, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4678250973904088, guid: d5202901ff847461ab2d52e678020624, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 4678250973904088, guid: d5202901ff847461ab2d52e678020624, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3581,11 +3585,6 @@ Prefab:
     - target: {fileID: 100000, guid: 2b127815fd0f2074eae3a0c6a4786d0b, type: 2}
       propertyPath: m_Name
       value: Box (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 54120414206626038, guid: 2b127815fd0f2074eae3a0c6a4786d0b,
-        type: 2}
-      propertyPath: m_AngularDrag
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b127815fd0f2074eae3a0c6a4786d0b, type: 2}
